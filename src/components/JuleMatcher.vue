@@ -3,43 +3,67 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import { ref } from "vue";
 
-const code = ref("abc123");
+const code = ref("");
 const visible = ref(false);
 const julee = ref("");
-const error = ref("")
+const error = ref("");
 
 const julees = ref(
   new Map([
-    ["abc123", "QnJpdHRh"],
-    ["abc124", "SmVzc2ljYQ=="],
-    ["abc124", "Qmr2cm4="],
-    ["abc125", "QW5uYWJlbGxl"],
-    ["abc126", "QmVu"],
-    ["abc127", "SnV0dGE="],
-    ["abc128", "V2VybmVy"],
-    ["abc129", "QmluZQ=="],
-    ["abc130", "U3RlZmZhbg=="],
-    ["abc131", "SGVuZHJpaw=="],
-    ["abc132", "TWFyZWs="],
-    ["abc132", "QW5uZQ=="],
+    ["0Q8YCx".toLowerCase(), "QnJpdHRh"], // Britta
+    ["5YMtOx".toLowerCase(), "SmVzc2ljYQ=="], // Jessica
+    ["Xm2yNU".toLowerCase(), "Qmr2cm4="], // Björn
+    ["MhF58T".toLowerCase(), "QW5uYWJlbGxl"], // Annabelle
+    ["OtH6ce".toLowerCase(), "QmVu"], // Ben
+    ["wlSs3f".toLowerCase(), "SnV0dGE="], // Jutta
+    ["nCqrPk".toLowerCase(), "V2VybmVy"], // Werner
+    ["kAM4Ml".toLowerCase(), "QmluZQ=="], // Bine
+    ["mWVDHC".toLowerCase(), "U3RlZmZhbg=="], // Steffan
+    ["iMEbt6".toLowerCase(), "SGVuZHJpaw=="], // Hendrik
+    ["Ok5NJg".toLowerCase(), "TWFyZWs="], // Marek
+    ["R1HgMn".toLowerCase(), "QW5uZQ=="], // Anne
   ])
 );
 
-function showJulee(code) {
+const showJulee = (code) => {
   visible.value = true;
   const val = julees.value.get(code);
   if (!!val) {
     julee.value = atob(julees.value.get(code));
   } else {
-    error.value = "Ungültiger Zugangscode!"
+    error.value = "Ungültiger Zugangscode!";
   }
+};
+
+const hide = () => {
+  visible.value = false;
+  julee.value = "";
+  error.value = "";
+};
+
+/*
+const createJulklappPairs = () => {
+  const teilnehmerCode = Array.from(julees.value).map(e => e[0])
+  let lostopf = Array.from(julees.value).map(e => e[0])
+  const paarungen = new Map()
+  
+  teilnehmerCode.forEach(t => {
+    console.log(t + " zieht aus...")
+    const lostopfOhneTeilnehmer = lostopf.filter(id => {
+      return t !== id
+    })
+    console.log(JSON.stringify(lostopfOhneTeilnehmer))
+    const gezogen = lostopfOhneTeilnehmer[Math.floor(Math.random()*lostopfOhneTeilnehmer.length)];
+    console.log(gezogen)
+    paarungen.set(t, gezogen)
+    lostopf = lostopf.filter(l => l !== gezogen)
+  })
+
+  console.log(paarungen)
 }
 
-function hide() {
-  visible.value = false;
-  julee.value = ""
-  error.value = ""
-}
+createJulklappPairs()
+*/
 </script>
 
 <template>
@@ -54,7 +78,7 @@ function hide() {
       maxlength="6"
       id="first_name"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-24 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      placeholder="Dein Zugangscode"
+      placeholder="abc001"
       required
       v-model="code"
       @input="hide"
@@ -68,12 +92,12 @@ function hide() {
     Anzeigen
   </button>
   <div class="mt-12 h-24">
-    <p v-if="visible && !error">
-      <p >Du beschenkst:</p>
+    <div v-if="visible && !error">
+      <p>Du beschenkst:</p>
       <div class="text-2xl text-indigo-800">
-      {{ julee }}
+        {{ julee }}
+      </div>
     </div>
-    </p>
     <p v-if="error" class="text-red-600">
       {{ error }}
     </p>
