@@ -8,20 +8,21 @@ const visible = ref(false);
 const julee = ref("");
 const error = ref("");
 
+// random ids created using https://www.random.org/strings/
 const julees = ref(
   new Map([
-    ["0Q8YCx".toLowerCase(), "QnJpdHRh"], // Britta
-    ["5YMtOx".toLowerCase(), "SmVzc2ljYQ=="], // Jessica
-    ["Xm2yNU".toLowerCase(), "Qmr2cm4="], // Björn
-    ["MhF58T".toLowerCase(), "QW5uYWJlbGxl"], // Annabelle
-    ["OtH6ce".toLowerCase(), "QmVu"], // Ben
-    ["wlSs3f".toLowerCase(), "SnV0dGE="], // Jutta
-    ["nCqrPk".toLowerCase(), "V2VybmVy"], // Werner
-    ["kAM4Ml".toLowerCase(), "QmluZQ=="], // Bine
-    ["mWVDHC".toLowerCase(), "U3RlZmZhbg=="], // Steffan
-    ["iMEbt6".toLowerCase(), "SGVuZHJpaw=="], // Hendrik
-    ["Ok5NJg".toLowerCase(), "TWFyZWs="], // Marek
-    ["R1HgMn".toLowerCase(), "QW5uZQ=="], // Anne
+    ["vwnk79".toLowerCase(), "QnJpdHRh"], // Britta
+    ["f4d0wt".toLowerCase(), "SmVzc2ljYQ=="], // Jessica
+    ["t6u4dl".toLowerCase(), "Qmr2cm4="], // Björn
+    ["sqssii".toLowerCase(), "QW5uYWJlbGxl"], // Annabelle
+    ["fak0nl".toLowerCase(), "QmVu"], // Ben
+    ["l1e91q".toLowerCase(), "SnV0dGE="], // Jutta
+    ["r3jluj".toLowerCase(), "V2VybmVy"], // Werner
+    //["kAM4Ml".toLowerCase(), "QmluZQ=="], // Bine
+    //["mWVDHC".toLowerCase(), "U3RlZmZhbg=="], // Steffan
+    ["8a7hse".toLowerCase(), "SGVuZHJpaw=="], // Hendrik
+    //["Ok5NJg".toLowerCase(), "TWFyZWs="], // Marek
+    //["R1HgMn".toLowerCase(), "QW5uZQ=="], // Anne
   ])
 );
 
@@ -41,7 +42,6 @@ const hide = () => {
   error.value = "";
 };
 
-/*
 const createJulklappPairs = () => {
   const teilnehmerCode = Array.from(julees.value).map(e => e[0])
   let lostopf = Array.from(julees.value).map(e => e[0])
@@ -63,7 +63,6 @@ const createJulklappPairs = () => {
 }
 
 createJulklappPairs()
-*/
 </script>
 
 <template>
