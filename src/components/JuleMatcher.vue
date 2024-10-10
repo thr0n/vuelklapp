@@ -62,7 +62,7 @@ const createJulklappPairs = () => {
   console.log(paarungen)
 }
 
-createJulklappPairs()
+// createJulklappPairs()
 </script>
 
 <template>
