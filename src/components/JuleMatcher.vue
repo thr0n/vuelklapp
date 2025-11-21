@@ -9,6 +9,7 @@ const julee = ref("");
 const error = ref("");
 
 // random ids created using https://www.random.org/strings/
+// access code -> base64 coded name
 const julees = ref(
   new Map([
     ["vwnk79".toLowerCase(), "QnJpdHRh"], // Britta
@@ -18,11 +19,8 @@ const julees = ref(
     ["fak0nl".toLowerCase(), "QmVu"], // Ben
     ["l1e91q".toLowerCase(), "SnV0dGE="], // Jutta
     ["r3jluj".toLowerCase(), "V2VybmVy"], // Werner
-    //["kAM4Ml".toLowerCase(), "QmluZQ=="], // Bine
-    //["mWVDHC".toLowerCase(), "U3RlZmZhbg=="], // Steffan
     ["8a7hse".toLowerCase(), "SGVuZHJpaw=="], // Hendrik
-    //["Ok5NJg".toLowerCase(), "TWFyZWs="], // Marek
-    //["R1HgMn".toLowerCase(), "QW5uZQ=="], // Anne
+    ["jahlqw".toLowerCase(), "SW5kaXJh"], // Indira
   ])
 );
 
@@ -42,27 +40,6 @@ const hide = () => {
   error.value = "";
 };
 
-const createJulklappPairs = () => {
-  const teilnehmerCode = Array.from(julees.value).map(e => e[0])
-  let lostopf = Array.from(julees.value).map(e => e[0])
-  const paarungen = new Map()
-  
-  teilnehmerCode.forEach(t => {
-    console.log(t + " zieht aus...")
-    const lostopfOhneTeilnehmer = lostopf.filter(id => {
-      return t !== id
-    })
-    console.log(JSON.stringify(lostopfOhneTeilnehmer))
-    const gezogen = lostopfOhneTeilnehmer[Math.floor(Math.random()*lostopfOhneTeilnehmer.length)];
-    console.log(gezogen)
-    paarungen.set(t, gezogen)
-    lostopf = lostopf.filter(l => l !== gezogen)
-  })
-
-  console.log(paarungen)
-}
-
-// createJulklappPairs()
 </script>
 
 <template>
