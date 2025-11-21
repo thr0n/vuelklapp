@@ -8,29 +8,33 @@ const visible = ref(false);
 const julee = ref("");
 const error = ref("");
 
-// random ids created using https://www.random.org/strings/
 const julees = ref(
   new Map([
-    ["vwnk79".toLowerCase(), "QnJpdHRh"], // Britta
-    ["f4d0wt".toLowerCase(), "SmVzc2ljYQ=="], // Jessica
-    ["t6u4dl".toLowerCase(), "Qmr2cm4="], // Björn
-    ["sqssii".toLowerCase(), "QW5uYWJlbGxl"], // Annabelle
-    ["fak0nl".toLowerCase(), "QmVu"], // Ben
-    ["l1e91q".toLowerCase(), "SnV0dGE="], // Jutta
-    ["r3jluj".toLowerCase(), "V2VybmVy"], // Werner
-    //["kAM4Ml".toLowerCase(), "QmluZQ=="], // Bine
-    //["mWVDHC".toLowerCase(), "U3RlZmZhbg=="], // Steffan
-    ["8a7hse".toLowerCase(), "SGVuZHJpaw=="], // Hendrik
-    //["Ok5NJg".toLowerCase(), "TWFyZWs="], // Marek
-    //["R1HgMn".toLowerCase(), "QW5uZQ=="], // Anne
-  ])
+    ["nbos4m", "SGVuZHJpaw=="],
+    ["rsopb0", "SmVzc2ljYQ=="],
+    ["luwgj8", "V2VybmVy"],
+    ["v0c0f3", "SnV0dGE="],
+    ["txujtm", "QnJpdHRh"],
+    ["6vp1yx", "QmrDtnJu"],
+    ["skheml", "QW5uYWJlbGxl"],
+    ["ounbgv", "QmVu"],
+    ["f6ap67", "SW5kaXJh"],
+  ]),
 );
+
+const base64ToBytes = (base64) => {
+  const binString = atob(base64);
+  return Uint8Array.from(binString, (m) => m.codePointAt(0));
+};
 
 const showJulee = (code) => {
   visible.value = true;
   const val = julees.value.get(code);
   if (!!val) {
-    julee.value = atob(julees.value.get(code));
+    const validUTF16StringDecoded = new TextDecoder().decode(
+      base64ToBytes(julees.value.get(code)),
+    );
+    julee.value = validUTF16StringDecoded;
   } else {
     error.value = "Ungültiger Zugangscode!";
   }
@@ -41,63 +45,46 @@ const hide = () => {
   julee.value = "";
   error.value = "";
 };
-
-const createJulklappPairs = () => {
-  const teilnehmerCode = Array.from(julees.value).map(e => e[0])
-  let lostopf = Array.from(julees.value).map(e => e[0])
-  const paarungen = new Map()
-  
-  teilnehmerCode.forEach(t => {
-    console.log(t + " zieht aus...")
-    const lostopfOhneTeilnehmer = lostopf.filter(id => {
-      return t !== id
-    })
-    console.log(JSON.stringify(lostopfOhneTeilnehmer))
-    const gezogen = lostopfOhneTeilnehmer[Math.floor(Math.random()*lostopfOhneTeilnehmer.length)];
-    console.log(gezogen)
-    paarungen.set(t, gezogen)
-    lostopf = lostopf.filter(l => l !== gezogen)
-  })
-
-  console.log(paarungen)
-}
-
-// createJulklappPairs()
 </script>
 
 <template>
-  <div class="flex flex-col justify-center items-center">
-    <label
-      for="first_name"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-      >Dein Zugangscode:</label
-    >
-    <input
-      type="text"
-      maxlength="6"
-      id="first_name"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-24 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      placeholder="abc001"
-      required
-      v-model="code"
-      @input="hide"
-      v-on:keyup.enter="showJulee(code)"
-    />
-  </div>
-  <button
-    @click="showJulee(code)"
-    class="h-10 px-5 m-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
-  >
-    Anzeigen
-  </button>
-  <div class="mt-12 h-24">
-    <div v-if="visible && !error">
-      <p>Du beschenkst:</p>
-      <div class="text-2xl text-indigo-800">
-        {{ julee }}
+  <div class="grid gap-6 mb-2">
+    <div class="grid gap-4 grid-cols-2">
+      <label
+        for="access_code"
+        class="flex text-l items-center justify-end font-medium text-gray-900 dark:text-gray-300"
+        >Dein Zugangscode:</label
+      >
+      <div class="flex justify-left">
+        <input
+          type="text"
+          maxlength="6"
+          id="access_code"
+          class="bg-[#f3f7f0] border border-[#8c5e58] text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-24 p-2.5"
+          placeholder="abc001"
+          required
+          v-model="code"
+          @input="hide"
+          v-on:keyup.enter="showJulee(code)"
+        />
       </div>
     </div>
-    <p v-if="error" class="text-red-600">
+    <div>
+      <button
+        class="bg-[#f2545b] hover:bg-[#e32d36] text-white font-bold py-2 px-4 rounded-2xl"
+        @click="showJulee(code)"
+      >
+        Anzeigen
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-6 h-24">
+    <div v-if="visible && !error">
+      <div class="text-white">Du beschenkst:</div>
+      <div class="text-4xl mt-2">{{ julee }}</div>
+    </div>
+    <p v-if="error" class="mt-2">
       {{ error }}
     </p>
   </div>

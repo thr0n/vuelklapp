@@ -5,8 +5,46 @@ import HelloWord from "./components/JuleMatcher.vue";
 </script>
 
 <template>
-  <h1 class="text-5xl font-normal leading-normal mt-0 mb-2 text-indigo-700">
-    Der Jul-o-Mat
+  <div class="snowflakes" aria-hidden="true">
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+    <div class="snowflake">
+      <div class="inner">❅</div>
+    </div>
+  </div>
+  <h1 class="text-5xl font-normal leading-normal mt-0 mb-4 text-indigo-700">
+    🎄 Der Jul-o-Mat 🎄
   </h1>
   <HelloWord />
 </template>
