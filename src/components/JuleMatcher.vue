@@ -52,7 +52,7 @@ const hide = () => {
     <div class="grid gap-4 grid-cols-2">
       <label
         for="access_code"
-        class="flex text-l items-center justify-end font-medium text-gray-900 dark:text-gray-300"
+        class="flex text-l items-center justify-end font-medium text-white dark:text-gray-300"
         >Dein Zugangscode:</label
       >
       <div class="flex justify-left">
@@ -71,7 +71,7 @@ const hide = () => {
     </div>
     <div>
       <button
-        class="bg-[#f2545b] hover:bg-[#e32d36] text-white font-bold py-2 px-4 rounded-2xl"
+        class="bg-[var(--c-red)] hover:bg-[#e32d36] text-white font-bold py-2 px-4 rounded-2xl"
         @click="showJulee(code)"
       >
         Anzeigen
